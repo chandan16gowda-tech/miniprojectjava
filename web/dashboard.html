@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Stock Portfolio - 4 Module Architecture</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <nav class="glass">
+        <div class="logo">Mini Stock Tracker <span style="font-size:0.8rem; color:var(--text-secondary);">(Modular
+                Monolith)</span></div>
+        <div class="links">
+            <span id="systemStatus" style="color:var(--success-color);">● System Active</span>
+        </div>
+    </nav>
+
+    <!-- Simulation Banner -->
+    <div
+        style="background: rgba(234, 179, 8, 0.2); color: #fde047; text-align: center; padding: 0.5rem; border-bottom: 1px solid rgba(234, 179, 8, 0.3);">
+        ⚠️ <strong>Market Simulation Active</strong>: Stock prices fluctuate randomly on every page refresh.
+    </div>
+
+    <div class="container">
+
+        <!-- MODULE 3: ANALYTICS (Top Dashboard) -->
+        <section class="module-section glass" style="border-top: 4px solid #a855f7;">
+            <h2 style="color: #a855f7;">📊 Module 3: Portfolio Analytics</h2>
+            <div class="dashboard-grid">
+                <div class="stat-card">
+                    <span>Total Invested</span>
+                    <div class="stat-value" id="totalInvested">$0.00</div>
+                </div>
+                <div class="stat-card">
+                    <span>Current Value</span>
+                    <div class="stat-value" id="currentValue">$0.00</div>
+                </div>
+                <div class="stat-card">
+                    <span>Total Profit/Loss</span>
+                    <div class="stat-value" id="totalPnL">$0.00</div>
+                </div>
+            </div>
+
+            <!-- Pie Chart Section -->
+            <div
+                style="display: flex; justify-content: space-around; align-items: center; margin-top: 2rem; flex-wrap: wrap;">
+                <div style="text-align: center;">
+                    <h3 style="margin-bottom: 1rem;">Portfolio Distribution</h3>
+                    <canvas id="portfolioChart" width="250" height="250"></canvas>
+                </div>
+                <div id="chartLegend" class="chart-legend"></div>
+            </div>
+        </section>
+
+        <div class="grid-2-col">
+            <!-- MODULE 1: STOCK MANAGEMENT -->
+            <section class="module-section glass" style="border-top: 4px solid #3b82f6;">
+                <h2 style="color: #3b82f6;">🏢 Module 1: Market Data</h2>
+                <p>Manage available stocks in the market.</p>
+
+                <div class="input-group">
+                    <input type="text" id="newStockSymbol" placeholder="Symbol (e.g. MSFT)" style="width: 30%;">
+                    <input type="text" id="newStockName" placeholder="Company Name" style="width: 40%;">
+                    <input type="number" id="newStockPrice" placeholder="Price" style="width: 20%;">
+                    <button class="btn btn-blue" onclick="addStock()">+ Add</button>
+                </div>
+
+                <table class="simple-table">
+                    <thead>
+                        <tr>
+                            <th>Symbol</th>
+                            <th>Name</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody id="marketTable"></tbody>
+                </table>
+            </section>
+
+            <!-- MODULE 2: TRANSACTIONS -->
+            <section class="module-section glass" style="border-top: 4px solid #22c55e;">
+                <h2 style="color: #22c55e;">💸 Module 2: Trading</h2>
+                <p>Buy and Sell stocks.</p>
+
+                <div class="transaction-panel">
+                    <select id="tradeSymbol">
+                        <option>Select Stock...</option>
+                    </select>
+                    <input type="number" id="tradeQty" placeholder="Qty">
+                    <div style="margin-top: 0.5rem;">
+                        <button class="btn btn-green" onclick="trade('BUY')">BUY</button>
+                        <button class="btn btn-red" onclick="trade('SELL')">SELL</button>
+                    </div>
+                </div>
+
+                <h3 style="margin-top:1rem;">Your Holdings</h3>
+                <table class="simple-table">
+                    <thead>
+                        <tr>
+                            <th>Symbol</th>
+                            <th>Qty</th>
+                            <th>Avg Price</th>
+                            <th>P/L</th>
+                        </tr>
+                    </thead>
+                    <tbody id="holdingsTable"></tbody>
+                </table>
+            </section>
+        </div>
+
+        <!-- MODULE 4: FILE HANDLING -->
+        <section class="module-section glass" style="border-top: 4px solid #f97316; margin-top: 2rem;">
+            <h2 style="color: #f97316;">📁 Module 4: File I/O</h2>
+            <p>Persist your portfolio data.</p>
+            <div style="display:flex; justify-content:center; gap: 1rem;">
+                <button class="btn btn-orange" onclick="saveData()">💾 Save Portfolio</button>
+                <button class="btn btn-orange" onclick="loadData()">📂 Load Portfolio</button>
+            </div>
+            <p id="fileStatus" style="text-align:center; margin-top:0.5rem; color:var(--text-secondary);"></p>
+        </section>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
