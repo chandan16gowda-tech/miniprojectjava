@@ -1,18 +1,20 @@
+package util;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DBConnection {
-    private static final String URL = "jdbc:postgresql://localhost:5432/postgres"; // CHANGE DB NAME IF NEEDED
-    private static final String USER = "postgres"; // CHANGE USER IF NEEDED
-    private static final String PASSWORD = "Nithin@7483"; // CHANGE PASSWORD IF NEEDED
+    private static final String URL = "jdbc:postgresql://localhost:5432/stock_portfolio_db";
+    private static final String USER = "postgres"; // Change as per your local setup
+    private static final String PASSWORD = "password"; // Change as per your local setup
 
     static {
         try {
             Class.forName("org.postgresql.Driver");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
-            System.err.println("PostgreSQL Driver not found! Make sure to add postgresql-x.x.x.jar to classpath.");
+            throw new RuntimeException("PostgreSQL JDBC Driver not found!");
         }
     }
 
